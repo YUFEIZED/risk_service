@@ -1,5 +1,5 @@
 # risk_service
-using django framework to build a risk assessment service
+Using django framework to build a risk assessment service
 ## introduction
 Customer register on the web with information: unique name and credit
 
