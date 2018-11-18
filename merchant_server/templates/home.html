@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+<H1 ALIGN="center">Risk Assessment Service</H1>
+</div>
+
+<div>
+<H2 ALIGN="left">Purchase Request</H2>
+<form name="purchase_request" method="get" action="{% url 'checkcredit' %}" onSubmit="return purchase_check()" >
+    <table border="0">
+        <tbody>
+            <tr>
+                <td>Customer Name:</td>
+                <td><input type="text" name="customer_name" /></td>
+            </tr>
+            <tr>
+                <td>Purchase Amount:</td>
+                <td><input type="number" name="purchase_amount" min="0" max="1000" default="0" step="1"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit" />  
+                    <input type="reset" value="Reset"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+</div>
+
+<div>
+<H2 ALIGN="left">Update Credit</H2>
+<form name="update_credit" method="post" action="{% url 'updatecredit' %}" onSubmit="return update_credit_check()">{% csrf_token %}
+    <table border="0">
+        <tbody>
+            <tr>
+                <td>Customer Name:</td>
+                <td><input type="text" name="customer_name" /></td>
+            </tr>            
+            <tr>
+                <td>Update Credit:</td>
+                <td><input type="number" name="new_credit" min="0" max="1000" default="0"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit" />  
+                    <input type="reset" value="Reset"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+</div>
+
+<div>
+<H2 ALIGN="left">Register New Customer</H2>
+<form name="add_customer" method="post" action="{% url 'addcustomer' %}" onSubmit="return register_check()">{% csrf_token %}
+    <table border="0">
+        <tbody>
+            <tr>
+                <td>Customer Name:</td>
+                <td><input type="text" name="customer_name" /></td>
+            </tr>
+
+            <tr>
+                <td>Credit:</td>
+                <td><input type="number" name="credit" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Register" />  
+                    <input type="reset" value="Reset"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+</div>
+
+<script language="javascript">
+
+    function register_check() {
+        if (document.add_customer.customer_name.value === "") {
+            window.alert("The name is empty!");
+            return false;
+        }
+        return true;
+    }
+
+    function purchase_check() {
+        if (document.purchase_request.customer_name.value === "") {
+            window.alert("The name is empty!");
+            return false;
+        }
+        return true;
+    }
+
+    function update_credit_check() {
+        if (document.update_credit_check.customer_name.value === "") {
+            window.alert("The name is empty!");
+            return false;
+        }
+        if (document.update_credit.new_credit.value === "") {
+            window.alert("The updated credit can't be empty!");
+            return false;
+        }        
+        return true;
+    }
+
+</script> 
+{% endblock %}
